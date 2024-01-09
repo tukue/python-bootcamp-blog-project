@@ -10,11 +10,6 @@ from flask_ckeditor import CKEditor
 import os 
 from dotenv import load_dotenv
 
-
-
-
-
-
 '''
 Make sure the required packages are installed: 
 Open the Terminal in PyCharm (bottom left). 
@@ -31,7 +26,6 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 Bootstrap5(app)
-
 
 
 # CONNECT TO DB
@@ -144,7 +138,6 @@ def edit_post(post_id):
         form.author.data = post.author
         form.img_url.data = post.img_url
 
-
     return render_template("make-post.html", form=form, post_id=post_id)
    
 
@@ -155,7 +148,6 @@ def delete_post(post_id):
     db.session.commit()
 
     return redirect(url_for('get_all_posts'))
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5003)
