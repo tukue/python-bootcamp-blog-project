@@ -6,7 +6,13 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditor, CKEditorField
 from datetime import date
-from flask_ckeditor import CKEditor
+from flask_ckeditor import CKEditor 
+import os 
+from dotenv import load_dotenv
+
+
+
+
 
 
 '''
@@ -21,9 +27,9 @@ pip3 install -r requirements.txt
 
 This will install the packages from the requirements.txt for this project.
 '''
-
+load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 Bootstrap5(app)
 
 
@@ -56,7 +62,7 @@ def get_all_posts():
     posts_list = [post for post in posts]
     return render_template("index.html", all_posts=posts_list)
 
-# TODO: Add a route so that you can click on individual posts.
+#  Add a route so that you can click on individual posts.
 @app.route('/')
 def show_post(post_id):
     # Retrieve a BlogPost from the database based on the post_id
@@ -65,7 +71,7 @@ def show_post(post_id):
     return render_template("post.html", post=requested_post)
 
 
-# TODO: add_new_post() to create a new blog post
+# add_new_post() to create a new blog post
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     subtitle = StringField('Subtitle', validators=[DataRequired()])
